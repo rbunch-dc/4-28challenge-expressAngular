@@ -15,15 +15,13 @@ var router = express.Router();
 	];
 
 /* GET home page. */
-router.get('/students', function(req, res, next) {
-	students.sort()
-  	res.json(students);
-});
-
-/* GET home page. */
-router.get('/students/reverse', function(req, res, next) {
-	students.sort();
-  	students.reverse();
+router.get('/students/:sortMethod', function(req, res, next) {
+	if(req.params.sortMethod == "sort"){
+		students.sort()	
+	}else if(req.params.sortMethod == "reverse"){
+		students.sort()	
+	  	students.reverse();
+  	}
   	res.json(students);
 });
 
