@@ -4,6 +4,9 @@ var mongoose = require('mongoose');
 var mongoUrl = "mongodb://localhost:27017/btb";
 var connection = mongoose.connect(mongoUrl);
 var Student = require('../models/students');
+var config = require('../config/keys');
+
+console.log(config);
 
 /* GET home page. */
 router.get('/students/:sortMethod', function(req, res, next) {
