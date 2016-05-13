@@ -14,6 +14,11 @@ studentApp.controller('studentController', function($scope, $http){
 		getStudentsFromApi('/students/reverse');
 	}
 
+
+
+	var formData = new FormData(form);
+	$http.post('http://localhost:3000/uploads', )
+
 	//the getStudents function that takes teh URL we are after
 	function getStudentsFromApi(urlEnding){
 		$http({method: 'GET', url: 'http://localhost:3050'+urlEnding}).then(

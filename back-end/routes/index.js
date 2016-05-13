@@ -4,9 +4,28 @@ var mongoose = require('mongoose');
 var mongoUrl = "mongodb://localhost:27017/btb";
 var connection = mongoose.connect(mongoUrl);
 var Student = require('../models/students');
-var config = require('../config/keys');
+// var config = require('../config/keys');
 
-console.log(config);
+var fs = require('fs'); //Include the file system module
+var multer = require('multer');
+var upload = multer({dest: 'uploads/'});
+var type = upload.single('uploadedFile');
+
+router.post('/uploads', type, function(req, res, next){
+	// res.json(req.file);
+	var targetPath = 'public/images/' + req.file.originalname
+	fs.readFile(req.file.path, function(error, data){
+		res.json((data.data));
+		fs.writeFile(targetPath, data, function(error){
+			if(error){
+				res.json('There was an error. ' + error);
+			}else{
+				// db.colleciton('cars').insertOne()
+				res.json('Success!');
+			}
+		})
+	})
+});
 
 /* GET home page. */
 router.get('/students/:sortMethod', function(req, res, next) {
